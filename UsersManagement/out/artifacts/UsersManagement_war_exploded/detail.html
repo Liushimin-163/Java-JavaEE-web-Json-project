@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div1{
+            width: 500px;
+            height:500px;
+            margin:0 auto;
+            font-size: small;
+            background-color: cyan;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function () {
+            var uid = getUrlParam("uid");
+            var param = {
+                action: "userDetail",
+                uid: uid,
+            };
+
+            $.get("/UsersManagement_war_exploded/controller?ran=" + Math.random(),
+                param,
+                function (data) {
+                    data = $.parseJSON(data);
+                    $("#span_uid").text(data.userId);
+                    $("#span_username").text(data.username);
+                    $("#span_password").text(data.password);
+                    $("#ing_head").attr("src", "upload/head/" + data.headimg);
+                });
+        })
+        getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    </script>
+</head>
+<body>
+<div class="div1">
+<p>User ID:<span id="span_uid"></span></p>
+<p>User Name:<span id="span_username"></span></p>
+<p>User password:<span id="span_password"></span></p>
+<p>User Image:<img id="ing_head" style="width:200px;height:200px"></p>
+<p><a href='Userlist.html'>Return users list page</a></p>
+</div>
+</body>
+</html>

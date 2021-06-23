@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userlist</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function(){
+            setTimeout(function(){
+                getlist();
+            },1000);
+        });
+        function getlist() {
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/UsersManagement_war_exploded/controller?action=userlist&ran="+Math.random(),
+        success: function (json) {
+            $("#myTb").empty();
+            var tbhead = "";
+            tbhead += "<tr>" +
+            "<td>Order</td>" +
+            "<td>User Id</td>" +
+            "<td>user name</td>" +
+            "<td>password</td>" +
+            "</tr>";
+            $("#myTb").append(tbhead);
+            $.each(json, function (i, n) {
+            var tbBody = "";
+            var trColor;
+           if (i % 2 == 0) {
+            trColor = "even";
+        } else {
+              trColor = "odd";
+          }
+        tbBody += "<tr class='" + trColor + "'>" +
+        "<td>" + (i + 1) + "</td>" +
+        "<td>" + n.userId + "</td>" +
+        "<td>" + n.username + "</td>" +
+        "<td>" + n.password + "</td>"
+            + "<td><a href='detail.html?uid=" + n.userId + "'>Detail</a></td>" +
+        "</tr>";
+
+        $("#myTb").append(tbBody);
+        });
+        },
+        error: function (json) {
+        alert("Fail load");
+        }
+        });
+        }
+</script>
+</head>
+<body>
+<div id="divTb">
+
+    <table id="myTb" style=" width:100%" class="table"></table>
+</div>
+<style>
+    .odd {
+
+        background-color:cyan;
+    }
+    .even{
+        background-color: antiquewhite;
+    }
+    #button1{
+        font-size: small;
+        font-kerning: auto;
+    }
+
+</style>
+</body>
+</html>
