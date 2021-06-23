@@ -1,4 +1,4 @@
-# Java-JavaEE-web-Json-project
+# Users information manangement system
 this project apply java，json ，html/css，jQuery，
 inter call the page and mysql
 
