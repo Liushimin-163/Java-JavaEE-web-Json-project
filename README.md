@@ -6,3 +6,4 @@ steps for this project:
 PM: give requirement 
 R&D  design infrastructure ,system and coding
 tester: test the project
+This system contains user login in, Users Register, Users information presentation functions.
